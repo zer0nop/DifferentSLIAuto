@@ -117,11 +117,12 @@ namespace DifferentSLIAuto
                 m_DriverFile = "nvlddmkm.sys";
             }
             if ((patches[0] = FindPattern(new byte[] { 0x74, 0x00, 0xFE, 0x81, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xBE, 0x81 }, "x?xx????xxx", 0x600)) == -1)
-                listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #1. Please inform Ember @ techPowerUp! forums.");
+                listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #1. Please inform Ember @ techPowerUp! forums.");            
             else if ((patches[1] = FindPattern(new byte[] { 0x74, 0x00, 0xFE, 0x81, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xBE, 0x81 }, "x?xx????xxx", patches[0] + 0xA)) == -1)
                 listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #2. Please inform Ember @ techPowerUp! forums.");
             if ((patches[2] = FindPattern(new byte[] { 0x85, 0xC0, 0x74, 0x00, 0x41, 0x0F, 0xBA, 0x2C, 0x24, 0x0F }, "xxx?xxxxxx", 0x600)) == -1)
-                listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #3. Please inform Ember @ techPowerUp! forums.");
+                if ((patches[2] = FindPattern(new byte[] { 0x85, 0xc0, 0x74, 0, 0x41, 15, 0xba, 0x2f, 15 }, "xxx?xxxxx", 0x600)) == -1)
+                    listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #3. Please inform Ember @ techPowerUp! forums.");
             if ((patches[3] = FindPattern(new byte[] { 0x75, 0x00, 0x0F, 0xBA, 0xE8, 0x00, 0x89, 0x45, 0x00, 0x85, 0xC0, 0x0F, 0x85, 0x00, 0x00, 0x00, 0x00, 0x85, 0xDB, 0x0F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x33 }, "x?xxx?xx?xxxx????xxxx????x", 0x600)) == -1)
             {
                 if ((patches[3] = FindPattern(new byte[] { 0x75, 0x00, 0x0F, 0xBA, 0x6D, 0x00, 0x0E, 0x85, 0xDB, 0x0F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x33 }, "x?xxx?xxxxx????x", 0x600)) == -1)
@@ -132,7 +133,11 @@ namespace DifferentSLIAuto
                         {
                             if ((patches[3] = FindPattern(new byte[] { 0x75, 0x05, 0x0F, 0xBA, 0x6D, 0x00, 0x00, 0x85, 0xF6, 0x0F, 0x84 }, "xxxxx??xxxx", 0x600)) == -1) //307.32
                             {
-                                listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #4. Please inform Ember @ techPowerUp! forums.");
+                                if ((patches[3] = FindPattern(new byte[] { 0x75, 0x3f, 15, 0xba, 0xea, 14, 0x89, 0x55, 0x3f, 0x85, 210, 15, 0x85, 0x3f, 0x3f, 0x3f, 0x3f, 0x85, 0xdb, 15, 0x84, 0x3f, 0x3f, 0x3f, 0x3f }, "x?xxxxxx?xxxx????xxxx????", 0x600)) == -1)
+                                {
+                                    listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #4. Please inform Ember @ techPowerUp! forums.");
+                                }
+                                else patchPerms[3] = 3;
                             }
                             else patchPerms[3] = 4;
                         }
