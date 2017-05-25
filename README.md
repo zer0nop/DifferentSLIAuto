@@ -21,9 +21,10 @@ Windows Test Sign Mode MUST be enabled for the patched drivers to load!
    OR  
    Q: SignTool lists multiple certificates suitable for signing  
    A: Follow all steps in post below  
-   http://www.techpowerup.com/forums/threads/sli-with-different-cards.158907/page-54#post-3215633  
+   https://www.techpowerup.com/forums/threads/sli-with-different-cards.158907/page-88#post-3644795  
 ####History
 ---
+   version 1.7 25/05/17 Supporting WHQL up to 382.33  
    version 1.5 08/12/16 Supporting WHQL up to 376.09  
    version 1.4 19/03/16 Supporting WHQL 364.51 and up  
    version 1.3.1 23/07/15 Preliminary Windows 10 support  
