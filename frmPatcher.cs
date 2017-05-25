@@ -41,7 +41,7 @@ namespace DifferentSLIAuto
 
         private void frmPatcher_Load(object sender, EventArgs e)
         {
-            listBoxLog.Log(ListBoxLog.Level.Info, string.Format("Welcome to {0},pleare read instructions carefully", this.Text));
+            listBoxLog.Log(ListBoxLog.Level.Info, string.Format("Welcome to {0} ,please read instructions carefully", this.Text));
             listBoxLog.Log(ListBoxLog.Level.Info, string.Format("Press \"{0}\" to patch your driver.", btnPatch.Text));
 
             byte[] dat = Properties.Resources.ufmod;
