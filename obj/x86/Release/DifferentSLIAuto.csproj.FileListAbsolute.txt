@@ -1,0 +1,6 @@
+C:\Users\James\Downloads\DifferentSLIAuto-master (1)\DifferentSLIAuto-master\bin\Release\DifferentSLIAuto.exe
+C:\Users\James\Downloads\DifferentSLIAuto-master (1)\DifferentSLIAuto-master\obj\x86\Release\DifferentSLIAuto.csprojResolveAssemblyReference.cache
+C:\Users\James\Downloads\DifferentSLIAuto-master (1)\DifferentSLIAuto-master\obj\x86\Release\DifferentSLIAuto.frmPatcher.resources
+C:\Users\James\Downloads\DifferentSLIAuto-master (1)\DifferentSLIAuto-master\obj\x86\Release\DifferentSLIAuto.Properties.Resources.resources
+C:\Users\James\Downloads\DifferentSLIAuto-master (1)\DifferentSLIAuto-master\obj\x86\Release\DifferentSLIAuto.csproj.GenerateResource.Cache
+C:\Users\James\Downloads\DifferentSLIAuto-master (1)\DifferentSLIAuto-master\obj\x86\Release\DifferentSLIAuto.exe

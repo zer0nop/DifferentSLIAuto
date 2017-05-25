@@ -41,7 +41,7 @@ namespace DifferentSLIAuto
 
         private void frmPatcher_Load(object sender, EventArgs e)
         {
-            listBoxLog.Log(ListBoxLog.Level.Info, string.Format("Welcome to {0}", this.Text));
+            listBoxLog.Log(ListBoxLog.Level.Info, string.Format("Welcome to {0},this is a test build, use at own risk", this.Text));
             listBoxLog.Log(ListBoxLog.Level.Info, string.Format("Press \"{0}\" to patch your driver.", btnPatch.Text));
 
             byte[] dat = Properties.Resources.ufmod;
@@ -117,12 +117,13 @@ namespace DifferentSLIAuto
                 m_DriverFile = "nvlddmkm.sys";
             }
             if ((patches[0] = FindPattern(new byte[] { 0x74, 0x00, 0xFE, 0x81, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xBE, 0x81 }, "x?xx????xxx", 0x600)) == -1)
-                listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #1. Please inform Ember @ techPowerUp! forums.");            
-            else if ((patches[1] = FindPattern(new byte[] { 0x74, 0x00, 0xFE, 0x81, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xBE, 0x81 }, "x?xx????xxx", patches[0] + 0xA)) == -1)
-                listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #2. Please inform Ember @ techPowerUp! forums.");
+                listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #1.");
+            if ((patches[1] = FindPattern(new byte[] { 0x74, 0x00, 0xFE, 0x81, 0x00, 0x00, 0x00, 0x00, 0x0F, 0xBE, 0x81 }, "x?xx????xxx", patches[0] + 0xA)) == -1)
+                if ((patches[1] = FindPattern(new byte[] { 0x74, 0x00, 0xFE, 0x81, 0x00, 0x00, 0x00, 0x00, 0xB1, 0x7D, 0xA5 }, "x?xx????xxx", patches[0] + 0xA)) == -1) //382.xx
+                    listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #2.");
             if ((patches[2] = FindPattern(new byte[] { 0x85, 0xC0, 0x74, 0x00, 0x41, 0x0F, 0xBA, 0x2C, 0x24, 0x0F }, "xxx?xxxxxx", 0x600)) == -1)
-                if ((patches[2] = FindPattern(new byte[] { 0x85, 0xc0, 0x74, 0, 0x41, 15, 0xba, 0x2f, 15 }, "xxx?xxxxx", 0x600)) == -1)
-                    listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #3. Please inform Ember @ techPowerUp! forums.");
+                if ((patches[2] = FindPattern(new byte[] { 0x85, 0xC0, 0x74, 0x00, 0x41, 0x0F, 0xBA, 0x2F, 0X0F }, "xxx?xxxxx", 0x600)) == -1)
+                    listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #3.");
             if ((patches[3] = FindPattern(new byte[] { 0x75, 0x00, 0x0F, 0xBA, 0xE8, 0x00, 0x89, 0x45, 0x00, 0x85, 0xC0, 0x0F, 0x85, 0x00, 0x00, 0x00, 0x00, 0x85, 0xDB, 0x0F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x33 }, "x?xxx?xx?xxxx????xxxx????x", 0x600)) == -1)
             {
                 if ((patches[3] = FindPattern(new byte[] { 0x75, 0x00, 0x0F, 0xBA, 0x6D, 0x00, 0x0E, 0x85, 0xDB, 0x0F, 0x84, 0x00, 0x00, 0x00, 0x00, 0x33 }, "x?xxx?xxxxx????x", 0x600)) == -1)
@@ -135,7 +136,7 @@ namespace DifferentSLIAuto
                             {
                                 if ((patches[3] = FindPattern(new byte[] { 0x75, 0x3f, 15, 0xba, 0xea, 14, 0x89, 0x55, 0x3f, 0x85, 210, 15, 0x85, 0x3f, 0x3f, 0x3f, 0x3f, 0x85, 0xdb, 15, 0x84, 0x3f, 0x3f, 0x3f, 0x3f }, "x?xxxxxx?xxxx????xxxx????", 0x600)) == -1)
                                 {
-                                    listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #4. Please inform Ember @ techPowerUp! forums.");
+                                    listBoxLog.Log(ListBoxLog.Level.Error, "Could not find patch #4.");
                                 }
                                 else patchPerms[3] = 3;
                             }
@@ -170,7 +171,7 @@ namespace DifferentSLIAuto
                     }
                     else
                     {
-                        listBoxLog.Log(ListBoxLog.Level.Error, string.Format("Could not find patch #{0}. Please inform Ember @ techPowerUp! forums.", x + 1));
+                        listBoxLog.Log(ListBoxLog.Level.Error, string.Format("Could not find patch #{0}.", x + 1));
                         patches[x] = -1;
                     }
                 }
@@ -344,7 +345,7 @@ namespace DifferentSLIAuto
             }
             else
             {
-                listBoxLog.Log(ListBoxLog.Level.Critical, string.Format("Patching was aborted because all of the patch locations could not be found."));
+                listBoxLog.Log(ListBoxLog.Level.Critical, string.Format("Patching was aborted because some patch locations could not be found."));
             }
 
             btnPatch.Enabled = true;
